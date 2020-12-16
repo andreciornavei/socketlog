@@ -55,7 +55,7 @@ API_RESPONSE_JWT_FIELD="jwt"
 
 ## That's all, folks
 
-I hope this proejct help you to save some time of server socket.io tests.
+I hope this project help you to save some time of server socket.io tests.
 
 ---
 
