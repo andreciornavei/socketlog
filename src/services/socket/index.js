@@ -9,6 +9,7 @@ export default function () {
     return {
         connect: (jwt, onConnect, onDisconnect) => {
             try {
+                console.log("SOCKETING=", jwt)
                 socket = socketIOClient(`${SERVER_URL}:${SERVER_PORT}`, { query: { jwt: jwt } });
                 onConnect(socket)
             } catch (error) {

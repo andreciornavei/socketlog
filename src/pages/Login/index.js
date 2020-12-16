@@ -29,25 +29,25 @@ const Login = () => {
         socket.on('connect', () => { pushLog("SOCKET_EVENT: connected") });
         socket.on('disconnect', () => { pushLog("SOCKET_EVENT: disconnect") });
         socket.on('error', () => { pushLog("SOCKET_EVENT: error") });
-        socket.on('connect_error', () => { pushLog("SOCKET_EVENT: connect_error") });
-        socket.on('connect_timeout', () => { pushLog("SOCKET_EVENT: connect_timeout") });
-        socket.on('reconnect', () => { pushLog("SOCKET_EVENT: reconnect") });
-        socket.on('reconnect_attempt', () => { pushLog("SOCKET_EVENT: reconnect_attempt") });
-        socket.on('reconnecting', () => { pushLog("SOCKET_EVENT: reconnecting") });
-        socket.on('reconnect_error', () => { pushLog("SOCKET_EVENT: reconnect_error") });
-        socket.on('reconnect_failed', () => { pushLog("SOCKET_EVENT: reconnect_failed") });
+        // socket.on('connect_error', () => { pushLog("SOCKET_EVENT: connect_error") });
+        // socket.on('connect_timeout', () => { pushLog("SOCKET_EVENT: connect_timeout") });
+        // socket.on('reconnect', () => { pushLog("SOCKET_EVENT: reconnect") });
+        // socket.on('reconnect_attempt', () => { pushLog("SOCKET_EVENT: reconnect_attempt") });
+        // socket.on('reconnecting', () => { pushLog("SOCKET_EVENT: reconnecting") });
+        // socket.on('reconnect_error', () => { pushLog("SOCKET_EVENT: reconnect_error") });
+        // socket.on('reconnect_failed', () => { pushLog("SOCKET_EVENT: reconnect_failed") });
     }
 
     const handleSubmit = (data) => {
         setEnabledLogin(false)
-        setLabelLogin("Conectando")
+        setLabelLogin("Connecting...")
         setError(undefined)
         getService("api").auth("login", {
             username: data.email,
             password: data.password,
-            onSuccess: (data) => {
-                pushLog(`HTTP: Auth success JWT(${data.jwt})`)
-                getService("socket").connect(data.jwt, onConnect)
+            onSuccess: (jwt) => {
+                pushLog(`HTTP: Auth success JWT(${jwt})`)
+                getService("socket").connect(jwt, onConnect)
                 setEnabledLogin(true)
                 setLabelLogin("Login")
             },
@@ -55,6 +55,9 @@ const Login = () => {
                 setEnabledLogin(true)
                 setLabelLogin("Login")
                 pushLog(`HTTP: ${error.message}`)
+            },
+            dispachMessage: (message) => {
+                pushLog(message)
             }
         })
     }
@@ -93,7 +96,7 @@ const Login = () => {
             <FlatList
                 data={logs}
                 contentContainerStyle={styles.logContainer}
-                renderItem={(row) => <Text style={{ color: colors.WHITE }}>{row.item}</Text>}
+                renderItem={(row) => <View style={{borderBottomWidth: 1, borderBottomColor: colors.GRAY, borderStyle: "solid", paddingBottom: 10, paddingTop: 10}}><Text style={{ color: colors.WHITE }}>{row.item}</Text></View>}
                 keyExtractor={(item, index) => `log-item-${index}`}
             />
         </View>

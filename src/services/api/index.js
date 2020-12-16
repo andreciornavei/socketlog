@@ -6,6 +6,7 @@ export default function () {
 
     let token = undefined
 
+    console.log(SERVER_URL,":", SERVER_PORT)
     const api = axios.create({
         baseURL: `${SERVER_URL}:${SERVER_PORT}`
     });
