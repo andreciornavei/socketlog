@@ -6,7 +6,7 @@ A simple React Native application built on Expo that helps backend developers to
 
 ## Overview
 
-This project was created with the purpose to improve a way to test socket.io technology implemented on server side. So developers can easily authenticate to the server over jwt, get the returned token and pass it over socket handshake to keep socket.io secure and associated to the user. Exposing all the socket events on app screen as a log to test if events is triggerign.
+This project was created with the purpose to improve a way to test socket.io technology implemented on server side. So developers can easily authenticate to the server over jwt, get the returned token and pass it over socket handshake to keep socket.io secure and associated to the user. Exposing all the socket events on app screen as a log to test if events is triggering.
 
 ---
 ## Technologies
